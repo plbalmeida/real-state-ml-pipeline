@@ -24,6 +24,7 @@ def get_db_connection():
     )
     return connection
 
+
 @app.post("/properties/")
 def create_property(property: Property):
     """
@@ -59,6 +60,7 @@ def create_property(property: Property):
     cursor.close()
     connection.close()
     return {"message": "Property inserted successfully"}
+
 
 @app.post("/properties/from-csv/")
 def create_properties_from_csv(file: UploadFile = File(...)):
