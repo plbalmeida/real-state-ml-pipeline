@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mysql:
-    build: ./my-sql
+    build: ./mysql
     container_name: mysql_container
     environment:
       MYSQL_ROOT_PASSWORD: root_password
@@ -14,7 +14,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
 
-  fastapi:
+  data-insert:
     build: ./data-insert
     container_name: data_insert_container
     depends_on:
@@ -27,6 +27,22 @@ services:
       - DB_PASSWORD=password
       - DB_NAME=db01
 
+  model-training:
+    build: ./model-training
+    container_name: model_training_container
+    depends_on:
+      - mysql
+    ports:
+      - "8001:8000"
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=db01
+    volumes:
+      - ./src:/app/src
+      - ./model-training/app:/app/app
+      - ./models:/models
+
 volumes:
   db_data:
-  
