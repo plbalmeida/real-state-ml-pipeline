@@ -14,5 +14,19 @@ services:
     volumes:
       - db_data:/var/lib/mysql
 
+  fastapi:
+    build: ./data-insert
+    container_name: data_insert_container
+    depends_on:
+      - mysql
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=db01
+
 volumes:
   db_data:
+  
