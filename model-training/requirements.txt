@@ -6,3 +6,4 @@ pymysql==1.0.3
 scikit-learn==1.2.2
 category_encoders==2.5.1
 joblib==1.2.0
+numpy==1.23.5

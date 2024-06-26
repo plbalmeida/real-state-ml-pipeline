@@ -44,5 +44,18 @@ services:
       - ./model-training/app:/app/app
       - ./models:/models
 
+  model-inference:
+    build: ./model-inference
+    container_name: model_inference_container
+    depends_on:
+      - model-training
+    ports:
+      - "8002:8000"
+    environment:
+      - API_KEY=${API_KEY}
+    volumes:
+      - ./models:/models
+      - ./src:/app/src 
+
 volumes:
   db_data:

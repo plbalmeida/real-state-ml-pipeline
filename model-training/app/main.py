@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 import pandas as pd
 import os
 import joblib
@@ -9,7 +9,6 @@ from src.model_pipeline import ModelPipeline
 app = FastAPI()
 
 
-# database configurations
 DB_USER = 'user'
 DB_PASSWORD = 'password'
 DB_HOST = 'mysql'
@@ -40,8 +39,10 @@ def train_model():
         dict: A message indicating that the model was trained and saved successfully,
               or indicating that no data was available for training.
     """  # noqa 401
-    query = "SELECT * FROM tb01"
-    df = pd.read_sql(query, engine)
+    query = text("SELECT * FROM tb01")
+
+    with engine.connect() as connection:
+        df = pd.read_sql(query, connection)
 
     if df.empty:
         return {"message": "No data available for training"}
