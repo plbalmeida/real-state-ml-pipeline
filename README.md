@@ -167,6 +167,10 @@ INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 INFO:     172.23.0.1:34952 - "POST /predict HTTP/1.1" 200 OK
 ```
 
+## `model-inference` API interactive documentation
+
+Navigate to http://localhost:8002/docs to access the Swagger UI.
+
 ## Improvement points
 
 - Automate the build and deployment process using CI/CD tools such as GitHub Actions;
