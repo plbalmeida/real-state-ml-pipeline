@@ -65,7 +65,9 @@ To run this project, you need to clone the repository:
 git clone https://github.com/plbalmeida/real-state-ml-pipeline.git
 ```
 
-First run build and up `mysql`, `data-insert` and `model-training` components:
+First of all, put the `train.csv` and `test.csv` in the `data/` path.
+
+Run build and up `mysql`, `data-insert` and `model-training` components:
 
 ```bash
 docker-compose up --build mysql data-insert model-training
